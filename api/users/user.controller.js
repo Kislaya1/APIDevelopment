@@ -111,7 +111,7 @@ module.exports = {
             const result = compareSync(body.password, results.password)
             if(result) {
                 results.password = undefined;
-                const jsonwebtoken = sign({result : results}, "qwe1234", {expiresIn : "1h"})
+                const jsonwebtoken = sign({result : results}, process.env.SECRET_KEY, {expiresIn : "1h"})
                 return res.status(200).json({
                     success : 1,
                     message : "Login Successfully. Token will be valid till 1 hour",
