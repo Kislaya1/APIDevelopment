@@ -19,6 +19,7 @@
   "homepage": "https://github.com/Kislaya1/APIDevelopment#readme",
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "console": "^0.7.2",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",

@@ -81,6 +81,7 @@ module.exports = {
     },
     deleteUser : (req, res) => {
         const data = req.body
+        const isAdmin = req.body.isAdmin
         deleteUser(data, (err, results) => {
             if(err) {
                 console.log(err)
@@ -90,6 +91,12 @@ module.exports = {
                 return res.status(404).json({
                     success : 0,
                     message : "Record not found"
+                })
+            }
+            if(isAdmin) {
+                return res.status(405).json({
+                    success : 0,
+                    message : "You are not allowed to delete this entry. Please try using different data."
                 })
             }
             return res.status(200).json({
@@ -106,7 +113,7 @@ module.exports = {
             if(!results)
                 return res.status(401).json({
                     success : 0,
-                    message : "Invalid email or password"
+                    message : "Login Unsuccessful ! Data not present w.r.t the email id, please signup."
                 });
             const result = compareSync(body.password, results.password)
             if(result) {

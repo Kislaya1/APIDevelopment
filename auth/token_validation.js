@@ -10,7 +10,10 @@ module.exports = {
                         success : 0,
                         message : "Invalid Token"
                     })
-                } else next()
+                } else {
+                    req.decoded = decoded
+                    next()
+                }
             })
         } else {
             res.status(403).json({

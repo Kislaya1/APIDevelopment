@@ -76,7 +76,7 @@ module.exports = {
     getUsersByEmailId : (data, callback) => {
         pool.query(
             `select firstName, lastName, gender, email, password, number from registration where email = ?`,
-            [email],
+            [data.email],
             (error, results, fields) => {
                 if(error)
                     callback(error)
@@ -84,5 +84,4 @@ module.exports = {
             }
         )
     }
-
 }
