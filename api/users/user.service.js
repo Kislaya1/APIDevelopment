@@ -72,6 +72,17 @@ module.exports = {
                 return callback(null, results[0])
             }
         )
-    } 
+    },
+    getUsersByEmailId : (data, callback) => {
+        pool.query(
+            `select firstName, lastName, gender, email, password, number from registration where email = ?`,
+            [email],
+            (error, results, fields) => {
+                if(error)
+                    callback(error)
+                return callback(null, results[0])
+            }
+        )
+    }
 
 }
