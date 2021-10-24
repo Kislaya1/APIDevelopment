@@ -1,0 +1,1066 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "College Management System",
+    "description": "<b>Swagger Documentation for College Management</b>"
+  },
+  "host": "localhost:3000",
+  "basePath": "/api/v1/college/",
+  "tags": [
+    {
+      "name": "Student Api",
+      "description": "<i>(Api accessed by students only)</i>"
+    },
+    {
+      "name": "Admin Api",
+      "description": "<i>(Api accessed by admins only)</i>"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "securityDefinitions": {
+    "Bearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header",
+      "description": "Enter JWT Token"
+    }
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/student/login": {
+      "post": {
+        "tags": [
+          "Student Api"
+        ],
+        "description": "Login as student",
+        "parameters": [
+          {
+            "name": "login student",
+            "in": "body",
+            "description": "Login as student",
+            "required": true,
+            "type": "object",
+            "schema": {
+              "$ref": "#/definitions/LoginStd"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LoginStdSuccess"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/LoginStdInvalidDetails"
+            }
+          }
+        }
+      }
+    },
+    "/student/record/{stdId}": {
+      "get": {
+        "tags": [
+          "Student Api"
+        ],
+        "description": "Get student data using student Id",
+        "parameters": [
+          {
+            "name": "stdId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Insert valid student Id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetStudentByIdSuccess"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizationStdAdmin"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/AccessDeniedStdAdmin"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/GetStudentByIdNotFound"
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/admin/signup": {
+      "post": {
+        "tags": [
+          "Admin Api"
+        ],
+        "description": "Signup as admin",
+        "parameters": [
+          {
+            "name": "signup admin",
+            "in": "body",
+            "description": "Signup as admin",
+            "required": true,
+            "type": "object",
+            "schema": {
+              "$ref": "#/definitions/SignupAdmin"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/SignupAdminSuccess"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/SignupAdminFailed"
+            }
+          }
+        }
+      }
+    },
+    "/admin/login": {
+      "post": {
+        "tags": [
+          "Admin Api"
+        ],
+        "description": "Login as admin",
+        "parameters": [
+          {
+            "name": "login admin",
+            "in": "body",
+            "description": "Login as admin",
+            "required": true,
+            "type": "object",
+            "schema": {
+              "$ref": "#/definitions/LoginAdmin"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LoginAdminSuccess"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/LoginAdminUnsuccess"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/LoginAdminUnauthorize"
+            }
+          }
+        }
+      }
+    },
+    "/admin/create/student/record": {
+      "post": {
+        "tags": [
+          "Admin Api"
+        ],
+        "description": "Create new student.",
+        "parameters": [
+          {
+            "name": "create student",
+            "in": "body",
+            "description": "Create new student. <b>'Note : Registration Id can not be duplicate.'</b>",
+            "required": true,
+            "type": "object",
+            "schema": {
+              "$ref": "#/definitions/CreateNewStudent"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/CreateNewStudentSuccess"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizationStdAdmin"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/AccessDeniedStdAdmin"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/CreateNewStudentDbIssue"
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/admin/record/{stdId}": {
+      "get": {
+        "tags": [
+          "Admin Api"
+        ],
+        "description": "Get student data using student Id",
+        "parameters": [
+          {
+            "name": "stdId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Insert valid student Id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetStudentByIdSuccessAdmin"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizationStdAdmin"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/AccessDeniedStdAdmin"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/GetStudentByIdNotFoundAdmin"
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/admin/student/records": {
+      "get": {
+        "tags": [
+          "Admin Api"
+        ],
+        "description": "Get all students data",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetAllStudentsByAdminSuccess"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizationStdAdmin"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/AccessDeniedStdAdmin"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/GetAllStudentsByAdminFail"
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/admin/edit/student/record": {
+      "patch": {
+        "tags": [
+          "Admin Api"
+        ],
+        "description": "Update single student record",
+        "parameters": [
+          {
+            "name": "update student",
+            "in": "body",
+            "description": "Update student record",
+            "required": true,
+            "type": "object",
+            "schema": {
+              "$ref": "#/definitions/UpdateStudentByAdmin"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UpdateStudentSuccess"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizationStdAdmin"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/AccessDeniedStdAdmin"
+            }
+          }
+        }
+      }
+    },
+    "/admin/delete/student/record": {
+      "delete": {
+        "tags": [
+          "Admin Api"
+        ],
+        "description": "Delete single student record",
+        "parameters": [
+          {
+            "name": "delete student",
+            "in": "body",
+            "description": "Delete student record",
+            "required": true,
+            "type": "object",
+            "schema": {
+              "$ref": "#/definitions/DeleteStudentByAdmin"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DeleteStudentSuccess"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizationStdAdmin"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/DeleteStudentForbidden"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "UnauthorizationStdAdmin": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": false
+        },
+        "statusMessage": {
+          "type": "string",
+          "example": "401 : Unauthorized"
+        },
+        "message": {
+          "type": "string",
+          "example": "Invalid Token"
+        }
+      }
+    },
+    "AccessDeniedStdAdmin": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": false
+        },
+        "statusMessage": {
+          "type": "string",
+          "example": "403 : Forbidden"
+        },
+        "message": {
+          "type": "string",
+          "example": "Access Denied! Unauthorized user"
+        }
+      }
+    },
+    "GetStudentByIdSuccess": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": true
+        },
+        "statusMessage": {
+          "type": "string",
+          "example": "200 : Ok"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "registrationId": {
+              "type": "number",
+              "example": 1
+            },
+            "firstName": {
+              "type": "string",
+              "example": "Tom"
+            },
+            "lastName": {
+              "type": "string",
+              "example": "Hanks"
+            },
+            "gender": {
+              "type": "string",
+              "example": "Male"
+            },
+            "email": {
+              "type": "string",
+              "example": "tom@abc.com"
+            },
+            "age": {
+              "type": "number",
+              "example": 25
+            },
+            "contactNumber": {
+              "type": "string",
+              "example": "304-332-4163"
+            },
+            "address": {
+              "type": "string",
+              "example": "4580 Grasselli Street, Manchester, USA"
+            },
+            "isActive": {
+              "type": "number",
+              "example": 1
+            }
+          }
+        }
+      }
+    },
+    "GetStudentByIdNotFound": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": false
+        },
+        "statusMessage": {
+          "type": "string",
+          "example": "404 : Not Found"
+        },
+        "message": {
+          "type": "string",
+          "example": "No Records Found ! Please contact your admin."
+        }
+      }
+    },
+    "LoginStd": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "email@abcd.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "abcd@123"
+        }
+      }
+    },
+    "LoginStdUnsuccess": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": false
+        },
+        "statusMessage": {
+          "type": "string",
+          "example": "401 : Unauthorized"
+        },
+        "message": {
+          "type": "string",
+          "example": "Student Login Unsuccessful ! No Records Found. Please contact your admin."
+        }
+      }
+    },
+    "LoginStdSuccess": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": true
+        },
+        "statusMessage": {
+          "type": "string",
+          "example": "200 : Ok"
+        },
+        "message": {
+          "type": "string",
+          "example": "Student Login Successfully. Token will be valid till 2 hour"
+        },
+        "token": {
+          "type": "string",
+          "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+        }
+      }
+    },
+    "LoginStdInvalidDetails": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": true
+        },
+        "statusMessage": {
+          "type": "string",
+          "example": "401 : Unauthorized"
+        },
+        "message": {
+          "type": "string",
+          "example": "Student Invalid Email or Password"
+        }
+      }
+    },
+    "GetStudentByIdNotFoundAdmin": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": false
+        },
+        "statusMessage": {
+          "type": "string",
+          "example": "404 : Not Found"
+        },
+        "message": {
+          "type": "string",
+          "example": "No Records Found ! Please create new record"
+        }
+      }
+    },
+    "GetStudentByIdSuccessAdmin": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": true
+        },
+        "statusMessage": {
+          "type": "string",
+          "example": "200 : Ok"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "registrationId": {
+              "type": "number",
+              "example": 1
+            },
+            "firstName": {
+              "type": "string",
+              "example": "Tom"
+            },
+            "lastName": {
+              "type": "string",
+              "example": "Hanks"
+            },
+            "gender": {
+              "type": "string",
+              "example": "Male"
+            },
+            "email": {
+              "type": "string",
+              "example": "tom@abc.com"
+            },
+            "age": {
+              "type": "number",
+              "example": 25
+            },
+            "contactNumber": {
+              "type": "string",
+              "example": "304-332-4163"
+            },
+            "address": {
+              "type": "string",
+              "example": "4580 Grasselli Street, Manchester, USA"
+            },
+            "isActive": {
+              "type": "number",
+              "example": 1
+            }
+          }
+        }
+      }
+    },
+    "SignupAdmin": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "email@abcd.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "abcd@123"
+        }
+      }
+    },
+    "SignupAdminFailed": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": false
+        },
+        "statusMessage": {
+          "type": "string",
+          "example": "500 : Internal Server Error"
+        },
+        "message": {
+          "type": "string",
+          "example": "Database connection error ! Please check the data you are trying to add."
+        }
+      }
+    },
+    "SignupAdminSuccess": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": true
+        },
+        "statusMessage": {
+          "type": "string",
+          "example": "Admin Signup Successfully ! Login using same credentials."
+        }
+      }
+    },
+    "LoginAdmin": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "email@abcd.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "abcd@123"
+        }
+      }
+    },
+    "LoginAdminUnsuccess": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": false
+        },
+        "statusMessage": {
+          "type": "string",
+          "example": "401 : Unauthorized"
+        },
+        "message": {
+          "type": "string",
+          "example": "Admin Login Unsuccessful ! Please signup."
+        }
+      }
+    },
+    "LoginAdminSuccess": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": true
+        },
+        "statusMessage": {
+          "type": "string",
+          "example": "200 : Ok"
+        },
+        "message": {
+          "type": "string",
+          "example": "Admin Login Successfully. Token will be valid till 2 hour"
+        },
+        "token": {
+          "type": "string",
+          "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+        }
+      }
+    },
+    "LoginAdminUnauthorize": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": false
+        },
+        "statusMessage": {
+          "type": "string",
+          "example": "403 : Forbidden"
+        },
+        "message": {
+          "type": "string",
+          "example": "Admin Invalid Email or Password"
+        }
+      }
+    },
+    "CreateNewStudent": {
+      "type": "object",
+      "properties": {
+        "registrationId": {
+          "type": "number",
+          "example": 1
+        },
+        "firstName": {
+          "type": "string",
+          "example": "Tom"
+        },
+        "lastName": {
+          "type": "string",
+          "example": "Hanks"
+        },
+        "gender": {
+          "type": "number",
+          "example": null
+        },
+        "email": {
+          "type": "string",
+          "example": "tom@abc.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "qwerty@123"
+        },
+        "age": {
+          "type": "number",
+          "example": 25
+        },
+        "contactNumber": {
+          "type": "string",
+          "example": "304-332-4163"
+        },
+        "address": {
+          "type": "string",
+          "example": "4580 Grasselli Street, Manchester, USA"
+        },
+        "isActive": {
+          "type": "boolean",
+          "example": true
+        }
+      }
+    },
+    "CreateNewStudentDbIssue": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": false
+        },
+        "statusMessage": {
+          "type": "string",
+          "example": "500 : Internal Server Error"
+        },
+        "message": {
+          "type": "string",
+          "example": "Database connection error ! Please check the data you are trying to add."
+        }
+      }
+    },
+    "CreateNewStudentSuccess": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": true
+        },
+        "statusMessage": {
+          "type": "string",
+          "example": "201 : Created"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "fieldCount": {
+              "type": "number",
+              "example": 0
+            },
+            "affectedRows": {
+              "type": "number",
+              "example": 1
+            },
+            "insertId": {
+              "type": "number",
+              "example": 0
+            },
+            "serverStatus": {
+              "type": "number",
+              "example": 2
+            },
+            "warningCount": {
+              "type": "number",
+              "example": 0
+            },
+            "message": {
+              "type": "string",
+              "example": ""
+            },
+            "protocol41": {
+              "type": "boolean",
+              "example": true
+            },
+            "changedRows": {
+              "type": "number",
+              "example": 0
+            }
+          }
+        }
+      }
+    },
+    "GetAllStudentsByAdminFail": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": false
+        },
+        "statusMessage": {
+          "type": "string",
+          "example": "404 : Not Found"
+        },
+        "message": {
+          "type": "string",
+          "example": "No records present ! Please enter students data."
+        }
+      }
+    },
+    "GetAllStudentsByAdminSuccess": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": true
+        },
+        "statusMessage": {
+          "type": "string",
+          "example": "200 : Ok"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "registrationId": {
+                "type": "number",
+                "example": 2
+              },
+              "firstName": {
+                "type": "string",
+                "example": "Micheal"
+              },
+              "lastName": {
+                "type": "string",
+                "example": "Clarke"
+              },
+              "gender": {
+                "type": "string",
+                "example": "Female"
+              },
+              "email": {
+                "type": "string",
+                "example": "mcl@ahii.com"
+              },
+              "age": {
+                "type": "number",
+                "example": 29
+              },
+              "contactNumber": {
+                "type": "string",
+                "example": "973-501-1506"
+              },
+              "address": {
+                "type": "string",
+                "example": "3800 Owagner Lane"
+              },
+              "isActive": {
+                "type": "number",
+                "example": 0
+              }
+            }
+          }
+        }
+      }
+    },
+    "UpdateStudentByAdmin": {
+      "type": "object",
+      "properties": {
+        "registrationId": {
+          "type": "number",
+          "example": 1
+        },
+        "firstName": {
+          "type": "string",
+          "example": "Tom"
+        },
+        "lastName": {
+          "type": "string",
+          "example": "Hanks"
+        },
+        "gender": {
+          "type": "number",
+          "example": null
+        },
+        "email": {
+          "type": "string",
+          "example": "tom@abc.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "qwerty@123"
+        },
+        "age": {
+          "type": "number",
+          "example": 25
+        },
+        "contactNumber": {
+          "type": "string",
+          "example": "304-332-4163"
+        },
+        "address": {
+          "type": "string",
+          "example": "4580 Grasselli Street, Manchester, USA"
+        },
+        "isActive": {
+          "type": "boolean",
+          "example": true
+        }
+      }
+    },
+    "UpdateStudentSuccess": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": true
+        },
+        "statusMessage": {
+          "type": "string",
+          "example": "200 : Ok"
+        },
+        "message": {
+          "type": "string",
+          "example": "Updated Successfully"
+        }
+      }
+    },
+    "DeleteStudentByAdmin": {
+      "type": "object",
+      "properties": {
+        "registrationId": {
+          "type": "number",
+          "example": 1
+        },
+        "isActive": {
+          "type": "boolean",
+          "example": true
+        }
+      }
+    },
+    "DeleteStudentForbidden": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": false
+        },
+        "statusMessage": {
+          "type": "string",
+          "example": "403 : Forbidden"
+        },
+        "message": {
+          "type": "string",
+          "example": "Can not delete the entry ! Student is Active. Please update isActive flag before deleting the entry."
+        }
+      }
+    },
+    "DeleteStudentSuccess": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": true
+        },
+        "statusMessage": {
+          "type": "string",
+          "example": "200 : Ok"
+        },
+        "message": {
+          "type": "string",
+          "example": "User deleted successfully"
+        }
+      }
+    }
+  }
+}

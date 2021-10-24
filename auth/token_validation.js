@@ -3,6 +3,11 @@ module.exports = {
     checkToken : (req, res, next) => {
         let token = req.get("authorization")
         if(token) {
+            /* 
+            #swagger.responses[401] = { 
+               schema: { $ref: "#/definitions/UnauthorizationStdAdmin" }
+            } 
+            */ 
             token = token.slice(7)
             verify(token, process.env.SECRET_KEY, (err, decoded) => {
                 if(err) {
@@ -16,7 +21,13 @@ module.exports = {
                     next()
                 }
             })
-        } else {
+        } 
+        /* 
+            #swagger.responses[403] = { 
+               schema: { $ref: "#/definitions/AccessDeniedStdAdmin" }
+            } 
+        */
+        else {
             res.status(403).json({
                 success : false,
                 statusMessage : "403 : Forbidden",
