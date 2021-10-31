@@ -333,7 +333,8 @@ module.exports = {
     updateStudent : (req, res) => {
     /* 
         #swagger.tags = ['Admin Api']
-        #swagger.description = 'Update single student record' 
+        #swagger.description = 'Update single student record'
+        #swagger.security = [{"Bearer": []}]
     */
     /* 
         #swagger.parameters['update student'] = {
@@ -368,7 +369,8 @@ module.exports = {
     deleteStudent : (req, res) => {
     /* 
         #swagger.tags = ['Admin Api']
-        #swagger.description = 'Delete single student record' 
+        #swagger.description = 'Delete single student record'
+        #swagger.security = [{"Bearer": []}]
     */
     /* 
         #swagger.parameters['delete student'] = {

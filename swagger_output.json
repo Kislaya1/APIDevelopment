@@ -367,7 +367,12 @@
               "$ref": "#/definitions/AccessDeniedStdAdmin"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
       }
     },
     "/admin/delete/student/record": {
@@ -407,7 +412,12 @@
               "$ref": "#/definitions/DeleteStudentForbidden"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
       }
     }
   },
