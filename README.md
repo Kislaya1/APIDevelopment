@@ -63,8 +63,9 @@ Module description is as below : -
     - use CollegeManagement;
     - create table if not exists admin_data(id INT NOT NULL AUTO_INCREMENT UNIQUE KEY, email varchar(256) PRIMARY KEY, password varchar(256) NOT NULL);
     - create table if not exists student_data(registrationId INT PRIMARY KEY, firstName varchar(25) NOT NULL, lastName varchar(25) NOT NULL, gender ENUM('Male', 'Female') NOT NULL, email varchar(256) NOT NULL UNIQUE KEY, password varchar(256) NOT NULL, age INT NOT NULL, contactNumber varchar(15) NOT NULL UNIQUE KEY, address varchar(256), isActive BOOLEAN);
-    - ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password'; (Actual CMD)
+    - ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
         For eg : ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'admin';
+        **Here root - username and admin - password**
     - flush privileges;
     - select * from student_data;
     - select * from admin_data;
