@@ -331,7 +331,7 @@
       }
     },
     "/admin/edit/student/record": {
-      "patch": {
+      "put": {
         "tags": [
           "Admin Api"
         ],

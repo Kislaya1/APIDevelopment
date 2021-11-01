@@ -9,10 +9,10 @@ router.get("/student/record/:stdId", checkToken , getStudentByStudentId)
 /*================================ Admin Router ========================================================*/
 router.post("/admin/signup", signupAdmin)
 router.post("/admin/login", loginAdmin)
-router.post("/admin/create/student/record", checkToken, createNewStudent)
-router.get("/admin/record/:stdId", checkToken , getStudentByStudentIdByAdmin)
+router.post("/admin/student/create/record", checkToken, createNewStudent)
+router.get("/admin/student/record/:stdId", checkToken , getStudentByStudentIdByAdmin)
 router.get("/admin/student/records", checkToken, getStudents)
-router.put("/admin/edit/student/record", checkToken, updateStudent)
-router.delete("/admin/delete/student/record", checkToken, deleteStudent)
+router.put("/admin/student/edit/record", checkToken, updateStudent)
+router.delete("/admin/student/delete/record", checkToken, deleteStudent)
 
 module.exports = router;
