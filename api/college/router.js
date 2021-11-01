@@ -12,7 +12,7 @@ router.post("/admin/login", loginAdmin)
 router.post("/admin/create/student/record", checkToken, createNewStudent)
 router.get("/admin/record/:stdId", checkToken , getStudentByStudentIdByAdmin)
 router.get("/admin/student/records", checkToken, getStudents)
-router.patch("/admin/edit/student/record", checkToken, updateStudent)
+router.put("/admin/edit/student/record", checkToken, updateStudent)
 router.delete("/admin/delete/student/record", checkToken, deleteStudent)
 
 module.exports = router;
