@@ -191,7 +191,7 @@
         }
       }
     },
-    "/admin/create/student/record": {
+    "/admin/student/create/record": {
       "post": {
         "tags": [
           "Admin Api"
@@ -242,7 +242,7 @@
         ]
       }
     },
-    "/admin/record/{stdId}": {
+    "/admin/student/record/{stdId}": {
       "get": {
         "tags": [
           "Admin Api"
@@ -330,7 +330,7 @@
         ]
       }
     },
-    "/admin/edit/student/record": {
+    "/admin/student/edit/record": {
       "put": {
         "tags": [
           "Admin Api"
@@ -375,7 +375,7 @@
         ]
       }
     },
-    "/admin/delete/student/record": {
+    "/admin/student/delete/record": {
       "delete": {
         "tags": [
           "Admin Api"
