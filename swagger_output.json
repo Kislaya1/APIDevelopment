@@ -35,40 +35,6 @@
     "application/json"
   ],
   "paths": {
-    "/student/login": {
-      "post": {
-        "tags": [
-          "Student Api"
-        ],
-        "description": "Login as student",
-        "parameters": [
-          {
-            "name": "login student",
-            "in": "body",
-            "description": "Login as student",
-            "required": true,
-            "type": "object",
-            "schema": {
-              "$ref": "#/definitions/LoginStd"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/LoginStdSuccess"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/LoginStdInvalidDetails"
-            }
-          }
-        }
-      }
-    },
     "/student/record/{stdId}": {
       "get": {
         "tags": [
@@ -91,30 +57,13 @@
               "$ref": "#/definitions/GetStudentByIdSuccess"
             }
           },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/UnauthorizationStdAdmin"
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "schema": {
-              "$ref": "#/definitions/AccessDeniedStdAdmin"
-            }
-          },
           "404": {
             "description": "Not Found",
             "schema": {
               "$ref": "#/definitions/GetStudentByIdNotFound"
             }
           }
-        },
-        "security": [
-          {
-            "Bearer": []
-          }
-        ]
+        }
       }
     },
     "/admin/signup": {

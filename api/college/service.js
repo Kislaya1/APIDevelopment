@@ -14,18 +14,6 @@ module.exports = {
             }
         )
     },
-    //2. Login Student
-    getStudentByEmailId : (email, callback) => {
-        pool.query(
-            `select email,password from student_data where email = ?`,
-            [email],
-            (error, results, fields) => {
-                if(error)
-                    callback(error)
-                return callback(null, results[0])
-            }
-        )
-    },
     /*================================ Admin Services ========================================================*/
     //1. Signup Admin
     createNewAdmin : (data, callback) => {

@@ -1,10 +1,9 @@
-const { getStudentByStudentId, loginStudent, signupAdmin, loginAdmin, createNewStudent, getStudents, updateStudent, deleteStudent, getStudentByStudentIdByAdmin } = require("./controller")
+const { getStudentByStudentId, signupAdmin, loginAdmin, createNewStudent, getStudents, updateStudent, deleteStudent, getStudentByStudentIdByAdmin } = require("./controller")
 const router = require("express").Router();
 const { checkToken } = require("../../auth/token_validation")
 
 /*================================ Student Router ========================================================*/
-router.post("/student/login", loginStudent)
-router.get("/student/record/:stdId", checkToken , getStudentByStudentId)
+router.get("/student/record/:stdId", getStudentByStudentId)
 
 /*================================ Admin Router ========================================================*/
 router.post("/admin/signup", signupAdmin)

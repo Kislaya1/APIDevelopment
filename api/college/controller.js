@@ -10,7 +10,6 @@ module.exports = {
             #swagger.tags = ['Student Api']
             #swagger.description = 'Get student data using student Id'
             #swagger.parameters['stdId'] = { description: 'Insert valid student Id', type: 'string' }
-            #swagger.security = [{"Bearer": []}]
         */
         const stdId = req.params.stdId
         getStudentByStudentId(stdId, (err, results) => { 
@@ -40,68 +39,6 @@ module.exports = {
                 statusMessage : "200 : Ok",
                 data : results
             })
-        })
-    },
-    //Login As Student
-    loginStudent : (req, res) => {
-        /* 
-            #swagger.tags = ['Student Api']
-            #swagger.description = 'Login as student' 
-        */
-        /* 
-            #swagger.parameters['login student'] = {
-               in: 'body',
-               description: 'Login as student',
-               required: true,
-               type: 'object',
-               schema: { $ref: "#/definitions/LoginStd" }
-        } */
-
-        const body = req.body
-        getStudentByEmailId(body.email, (err, results) => {
-            if(err) 
-                console.log(err)
-
-        /* 
-            #swagger.responses[401] = { 
-               schema: { $ref: "#/definitions/LoginStdUnsuccess" }
-            } 
-        */
-
-            if(!results)
-                return res.status(401).json({
-                    success : false,
-                    statusMessage : "401 : Unauthorized",
-                    message : "Student Login Unsuccessful ! No Records Found. Please contact your admin."
-                });
-            const result = compareSync(body.password, results.password)
-            if(result) {
-                results.password = undefined;
-                const jsonwebtoken = sign({result : results}, process.env.SECRET_KEY, {expiresIn : "2h"})
-        /*
-            #swagger.responses[200] = { 
-                schema: { $ref: "#/definitions/LoginStdSuccess" }
-            } 
-        */
-                return res.status(200).json({
-                    success : true,
-                    statusMessage : "200 : Ok",
-                    message : "Student Login Successfully. Token will be valid till 2 hour",
-                    token : jsonwebtoken
-                })
-            } 
-        /*
-           #swagger.responses[401] = { 
-                schema: { $ref: "#/definitions/LoginStdInvalidDetails" }
-            } 
-        */
-            else {
-                return res.status(401).json({
-                    success : true,
-                    statusMessage : "401 : Unauthorized",
-                    message : "Student Invalid Email or Password"
-                })
-            }
         })
     },
 
