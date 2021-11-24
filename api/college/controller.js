@@ -37,6 +37,7 @@ module.exports = {
             return res.status(200).json({
                 success : true,
                 statusMessage : "200 : Ok",
+                message : "Single Student data successfully fetched",
                 data : results
             })
         })
@@ -77,6 +78,7 @@ module.exports = {
             return res.status(200).json({
                 success : true,
                 statusMessage : "200 : Ok",
+                message : "Single Student data successfully fetched",
                 data : results
             })
         })
@@ -120,7 +122,8 @@ module.exports = {
         */
             return res.status(201).json({
                 success : true,
-                statusMessage : "Admin Signup Successfully ! Login using same credentials."
+                statusMessage : "201 : Created",
+                message : "Admin Signup Successfully ! Login using same credentials."
             })
         })
     },
@@ -226,6 +229,7 @@ module.exports = {
             return res.status(201).json({
                 success : true,
                 statusMessage : "201 : Created",
+                message : "Student created successfully",
                 data : results
             })
         })
@@ -262,6 +266,7 @@ module.exports = {
             return res.status(200).json({
                 success : true,
                 statusMessage : "200 : Ok",
+                message : "Successfully fetched all student's data",
                 data : results
             })
         })

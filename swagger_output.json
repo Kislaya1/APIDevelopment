@@ -416,6 +416,10 @@
           "type": "string",
           "example": "200 : Ok"
         },
+        "message": {
+          "type": "string",
+          "example": "Single Student data successfully fetched"
+        },
         "data": {
           "type": "object",
           "properties": {
@@ -572,6 +576,10 @@
           "type": "string",
           "example": "200 : Ok"
         },
+        "message": {
+          "type": "string",
+          "example": "Single Student data successfully fetched"
+        },
         "data": {
           "type": "object",
           "properties": {
@@ -653,6 +661,10 @@
           "example": true
         },
         "statusMessage": {
+          "type": "string",
+          "example": "201 : Created"
+        },
+        "message": {
           "type": "string",
           "example": "Admin Signup Successfully ! Login using same credentials."
         }
@@ -799,6 +811,10 @@
           "type": "string",
           "example": "201 : Created"
         },
+        "message": {
+          "type": "string",
+          "example": "Student created successfully"
+        },
         "data": {
           "type": "object",
           "properties": {
@@ -865,6 +881,10 @@
         "statusMessage": {
           "type": "string",
           "example": "200 : Ok"
+        },
+        "message": {
+          "type": "string",
+          "example": "Successfully fetched all student's data"
         },
         "data": {
           "type": "array",

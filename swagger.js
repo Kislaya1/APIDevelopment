@@ -46,6 +46,7 @@ const doc = {
         GetStudentByIdSuccess: {
             "success" : true,
             "statusMessage" : "200 : Ok",
+            "message" : "Single Student data successfully fetched",
             "data": {
                 "registrationId": 1,
                 "firstName": "Tom",
@@ -91,6 +92,7 @@ const doc = {
         GetStudentByIdSuccessAdmin: {
             "success" : true,
             "statusMessage" : "200 : Ok",
+            "message" : "Single Student data successfully fetched",
             "data": {
                 "registrationId": 1,
                 "firstName": "Tom",
@@ -114,7 +116,8 @@ const doc = {
         },
         SignupAdminSuccess: {
             "success" : true,
-            "statusMessage" : "Admin Signup Successfully ! Login using same credentials."
+            "statusMessage" : "201 : Created",
+            "message" : "Admin Signup Successfully ! Login using same credentials."
         },
         LoginAdmin: {
             "email": "email@abcd.com",
@@ -132,9 +135,9 @@ const doc = {
             "token" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
         },
         LoginAdminUnauthorize: {
-            success : false,
-            statusMessage : "403 : Forbidden",
-            message : "Admin Invalid Email or Password"
+            "success" : false,
+            "statusMessage" : "403 : Forbidden",
+            "message" : "Admin Invalid Email or Password"
         },
         CreateNewStudent: {
             "registrationId": 1,
@@ -156,6 +159,7 @@ const doc = {
         CreateNewStudentSuccess: {
             "success" : true,
             "statusMessage" : "201 : Created",
+            "message" : "Student created successfully",
             "data": {
                 "fieldCount": 0,
                 "affectedRows": 1,
@@ -168,13 +172,14 @@ const doc = {
             }
         },
         GetAllStudentsByAdminFail: {
-            success : false,
-            statusMessage : "404 : Not Found",
-            message : "No records present ! Please enter students data."
+            "success" : false,
+            "statusMessage" : "404 : Not Found",
+            "message" : "No records present ! Please enter students data."
         },
         GetAllStudentsByAdminSuccess: {
             "success": true,
             "statusMessage": "200 : Ok",
+            "message" : "Successfully fetched all student's data",
             "data": [
                 {
                     "registrationId": 1,
